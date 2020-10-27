@@ -9,8 +9,9 @@ const defaultState = {
    
    showDuration: 'thisWeek',
    durations: ['lastWeek', 'thisWeek', 'past2days'],
-   showMetro: 'SF', 
-   metros: ['NY', 'SF', 'LA'],
+
+   showMetro: 'Bay_Area', 
+   metros: ['New_York', 'Bay_Area', 'Los_Angeles'],
 
 
    showPtype: 'All', //all = stats by city?
@@ -28,6 +29,21 @@ const reducer = (state, action) => {
            ...state,
            data: action.message,
        }
+       case 'setMetros':
+         return {
+           ...state,
+           metros: action.message,
+       }
+       case 'setPtypes':
+         return {
+           ...state,
+           pTypes: action.message,
+       }
+       case 'setDurations':
+         return {
+           ...state,
+           durations: action.message,
+       }
        case 'wasDataReceived':
          return {
            ...state,
@@ -36,17 +52,17 @@ const reducer = (state, action) => {
       case 'showDuration': 
       return {
          ...state,
-         showDuration: defaultState.durations[action.message],
+         showDuration: state.durations[action.message],
       }
      case 'showMetro': 
       return {
          ...state,
-         showMetro: defaultState.metros[action.message],
+         showMetro: state.metros[action.message],
       }
       case 'showPtype': 
       return {
          ...state,
-         showPtype: defaultState.pTypes[action.message],
+         showPtype: action.message,
       }
      case 'setDateToday':
        return {

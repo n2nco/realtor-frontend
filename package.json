@@ -13,14 +13,20 @@
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.20.0",
     "babel-loader": "^8.1.0",
+    "chart.js": "^2.9.4",
+    "chartkick": "^3.2.1",
     "clsx": "^1.1.1",
     "moment-timezone": "^0.5.31",
+    "outliers": "^0.0.3",
     "prop-types": "^15.7.2",
     "react": "^16.14.0",
+    "react-chartkick": "^0.4.1",
     "react-datasheet": "^1.4.8",
     "react-dom": "^16.14.0",
     "react-scripts": "3.4.3",
-    "react-swipeable-views": "^0.13.9"
+    "react-sparklines": "^1.7.0",
+    "react-swipeable-views": "^0.13.9",
+    "react-trend": "^1.2.5"
   },
   "scripts": {
     "start": "react-scripts start",

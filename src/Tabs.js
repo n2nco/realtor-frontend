@@ -16,7 +16,7 @@ import { StoreContext }  from './StoreProvider'
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
-    width: '90vw',
+     width: '90vw',
   },
 
 //   '&.MuiTabs-root': {
