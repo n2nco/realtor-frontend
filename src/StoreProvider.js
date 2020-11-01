@@ -11,12 +11,15 @@ const defaultState = {
    durations: ['lastWeek', 'thisWeek', 'past2days'],
 
    showMetro: 'Bay_Area', 
-   metros: ['New_York', 'Bay_Area', 'Los_Angeles'],
+   metros: ['New_York', 'Bay_Area', 'Los_Angeles', 'Seattle', 'San_Diego', 'Portland'],
 
 
    showPtype: 'All', //all = stats by city?
    pTypes: ["All", "Single Family Home", "Land", "Multi-Family Home","Condo/Townhome","Mfd/Mobile Home" ],
    dateToday: false,
+
+   htmlStrings: false,
+   showHtmlString: false,
 
    data: false
 
@@ -44,6 +47,14 @@ const reducer = (state, action) => {
            ...state,
            durations: action.message,
        }
+       case 'setHtmlStrings':
+          window.htmlStrings = action.message
+
+
+         return {
+           ...state,
+           htmlStrings: action.message,
+       }
        case 'wasDataReceived':
          return {
            ...state,
@@ -55,9 +66,30 @@ const reducer = (state, action) => {
          showDuration: state.durations[action.message],
       }
      case 'showMetro': 
+       let h = state.htmlStrings[state.metros[action.message]].htmlString
+       window.showMetro = state.metros[action.message]
+       setTimeout( () => window.changeTableau(state.metros[action.message]), 0)
+      
+   //   document.body.insertAdjacentHTML('afterbegin',state.htmlStrings[state.metros[action.message]]?.htmlString);
+   //   <script dangerouslySetInnerHTML={{ __html: `</script>
+   //    <link rel="preload" href="https://fonts.googleapis.com/css?family=Open+Sans" as="style" onLoad="this.onload=null;this.rel='stylesheet'" crossOrigin="anonymous"/>
+   // <script>`,}}/>
+      // let h = state.htmlStrings[state.metros[action.message]]?.htmlString
+      // // window.showTableau(h)
+      // document.body.append(document.createElement('d2'))
+      // document.querySelector('d2').dangerouslySetInnerHTML = h
+      //  let d = document.createElement("div")
+      //  let h = state.htmlStrings[state.metros[action.message]]?.htmlString
+      //  d.dangerouslySetInnerHTML = h
+      //  document.body.appendChild(d)
+
+      //  <div dangerouslySetInnerHTML={{__html: 'First &middot; Second'}} />
+
+
       return {
          ...state,
          showMetro: state.metros[action.message],
+         showHtmlString: h
       }
       case 'showPtype': 
       return {

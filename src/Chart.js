@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useContext} from 'react';
 import { DataGrid } from '@material-ui/data-grid';
 import { useDemoData } from '@material-ui/x-grid-data-generator';
-import { withStyles, makeStyles } from "@material-ui/core";
+import { withStyles, makeStyles, SvgIcon, Icon } from "@material-ui/core";
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 
@@ -13,6 +13,8 @@ import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import MovieIcon from '@material-ui/icons/Movie';
 import ComputerIcon from '@material-ui/icons/Computer';
+
+
 
 
 import Typography from '@material-ui/core/Typography';
@@ -33,11 +35,32 @@ import Trend from 'react-trend';
 
 import outliers from 'outliers'
 
+import seattleIcon from './seattle-icon.svg';
+import sanDiegoIcon from './sanDiego-icon.svg';
+import portlandIcon from './portland-icon.svg'
+
+
 // const TableCell = withStyles({
 //   root: {
 //     borderBottom: "none"
 //   }
 // })(MuiTableCell);
+
+const SeattleIcon = () => (
+  <Icon>
+      <img src={seattleIcon} height={25} width={25}/>
+  </Icon>
+)
+const SanDiegoIcon = () => (
+  <Icon>
+      <img src={sanDiegoIcon} height={25} width={25}/>
+  </Icon>
+)
+const PortlandIcon = () => (
+  <Icon>
+      <img src={portlandIcon} height={25} width={25}/>
+  </Icon>
+)
 
 const useStyles = makeStyles(theme => ({
   
@@ -50,6 +73,9 @@ const useStyles = makeStyles(theme => ({
       },
       '&.MuiDataGrid-root .MuiDataGrid-cell' :{
        borderBottom: 'none'
+      },
+      '& .Mui-odd': {
+        backgroundColor: '#f9f9f9'
       },
       
  
@@ -101,6 +127,8 @@ export const Chart = () => {
               store.dispatch({ type: 'setMetros', message: data.metros})
               store.dispatch({ type: 'setPtypes', message: data.pTypes})
               store.dispatch({ type: 'setDurations', message: data.durations})
+              store.dispatch({type: 'setHtmlStrings', message: data.htmlStrings})
+
               let statsByNew = data.statsByNew
               
               store.dispatch({type: 'setData', message: statsByNew}) //data.duration.metro.pType
@@ -122,17 +150,8 @@ export const Chart = () => {
      let { data: data, showDuration : d, showMetro: m, showPtype: p} = store.state
      let x = data[d][m][p]
      return data[d][m][p]
-
-      // else {
-      //   dataArr = store.state.data.statsBy[store.state.duration].filter( (el, index) => {
-        
-
-      //   })
-      // }
-
-      // return data.city //need to make this work for pTypes
    
-     }
+    }
 
      const currencyFormatter = new Intl.NumberFormat('en-US', {
       style: 'currency',
@@ -155,7 +174,7 @@ export const Chart = () => {
 
        if (showPtype === 'Land') { //ALL = just show by city
           const landCols = [
-            { field: 'city', headerName: 'City', width: 150,  align: 'left', 
+            { field: 'city', headerName: 'City', width: 150,  align: 'center', 
               valueGetter: (params) => {
                   let x = params.getValue('city')
                   x = x.replace("_CA", "")
@@ -163,7 +182,7 @@ export const Chart = () => {
               },
             },
             { field: `nSold`, headerName: '# Sold',  width: 90 },
-            { field: `medPlotSizeAcres`, headerName: 'Price/Acre (Median)', ...usdPrice, width: 180 },
+            { field: `medPlotSizeAcres`, headerName: 'Price/Acre (Median)', ...usdPrice, width: 170 },
             { field: `medLotSizeAcres`, headerName: 'Lot Size (Median)', width: 180, align: 'right' },
             { field: `medPlotSizePchangeAcres`, headerName: 'W/W Price/Acres Med. change', width: 230, valueGetter: (params) => {
               const nSold = params.getValue('nSold')
@@ -188,13 +207,13 @@ export const Chart = () => {
             { field: 'city', headerName: 'City', width: 150,  align: 'left', 
                valueGetter: (params) => {
                   let x = params.getValue('city')
-                  x = x.replace("_CA", "")
+                  x = x.replace("_CA", "").replace("_NY", "").replace("_WA", "")
                   x = x.replace("_Los-Angeles", "")
                   return x
                },
             },
-            { field: `nSold`, headerName: '# Sold',  width: 90 },
-            { field: `medPsqFt`, headerName: 'Price/SqFt (Median)', ...usdPrice, width: 200, valueGetter: (params) => {
+            { field: `nSold`, headerName: '# Sold',  width: 80 },
+            { field: `medPsqFt`, headerName: 'Price/SqFt (Med.)', ...usdPrice, width: 140, valueGetter: (params) => {
               let x 
               if(store.state.showPtype == 'Land') {
                 return params.getValue('medPlotSize')
@@ -202,7 +221,7 @@ export const Chart = () => {
             else { return params.getValue('medPsqFt')}}
           },
 
-             { field: `medPsqFtPchange`, headerName: 'W/W Price/SqFt Med. change', width: 230, align: 'right', valueGetter: (params) => {
+             { field: `medPsqFtPchange`, headerName: 'Change W/W $/SqFt Med.', width: 210, align: 'right', valueGetter: (params) => {
                 let x 
                 if(store.state.showPtype == 'Land') {
                   x = params.getValue('medPlotSizePchangeAcres')
@@ -218,9 +237,9 @@ export const Chart = () => {
                 return x
               },  
             },
-            { field: `medSp`, headerName: 'Sold Price (Median)', ...usdPrice, width: 200  },
-            { field: `meanSp`, headerName: 'Sold Price (Average)', ...usdPrice, width: 200  },
-            { field: `ppSqFtArr`, headerName: '14d med price/sqFt chart', ...usdPrice, width: 240, renderCell: (params) => {
+            { field: `medSp`, headerName: 'Sold Price (Med.)', ...usdPrice, width: 150  },
+            { field: `meanSp`, headerName: 'Sold Price (Avg.)', ...usdPrice, width: 150  },
+            { field: `ppSqFtArr`, headerName: 'last 14 days - med $/sqFt chart', ...usdPrice, width: 250, renderCell: (params) => {
                let city = params.getValue('city')
                let pType = params.getValue('pType')
                let totalData = store.state.data.total2weeks[store.state.showMetro][pType].filter(el => el.city == city)[0]
@@ -292,6 +311,8 @@ export const Chart = () => {
    }
    const [value, setValue] = useState(1)
 
+
+   //Not in use, as now using <Trend> where data = 1d array:
    const getChartArr = (params)=> { 
       let city = params.getValue('city')
       let pType = params.getValue('pType')
@@ -332,26 +353,29 @@ export const Chart = () => {
       }}
       showLabels
       className={classes.root}
+      style={{paddingBottom: '20px'}}
     >
       <BottomNavigationAction label="NYC" icon={<AccountBalanceIcon />} />
       <BottomNavigationAction label="SF Bay Area" icon={<ComputerIcon />} />
       <BottomNavigationAction label="LA" icon={<MovieIcon />} />
+      <BottomNavigationAction label="Seattle" icon={<SeattleIcon />} />
+      <BottomNavigationAction label="San Diego" icon={<SanDiegoIcon />} />
+      <BottomNavigationAction label="Portland" icon={<PortlandIcon />} />
       </BottomNavigation>
 
        {/* <Typography style={{ paddingBottom: '40px', paddingTop: '10px'}}> {camelToSpace(showDuration)} - By {camelToSpace(store.state.show)} </Typography> */}
        <ButtonGroup variant="text" color="primary" aria-label="text primary button group">
          {/*!Secondary = red*/}
-        <Button onClick={() => { store.dispatch({type:'showPtype', message: store.state.pTypes[0]})}} color={(store.state.showPtype == store.state.pTypes[0]) ? "secondary" : "primary"} >{store.state.pTypes[0]}</Button>
-        <Button onClick={() => { store.dispatch({type:'showPtype', message: store.state.pTypes[1]})}}  color={(store.state.showPtype == store.state.pTypes[1]) ? "secondary" : "primary"}>{store.state.pTypes[1]} </Button>
-        <Button onClick={() => { store.dispatch({type:'showPtype', message: store.state.pTypes[2]})}} color={(store.state.showPtype == store.state.pTypes[2]) ? "secondary" : "primary"}>{store.state.pTypes[2]}</Button>
-        <Button onClick={() => { store.dispatch({type:'showPtype', message: store.state.pTypes[3]})}} color={(store.state.showPtype == store.state.pTypes[3]) ? "secondary" : "primary"}>{store.state.pTypes[3]}</Button>
-        <Button onClick={() => { store.dispatch({type:'showPtype', message: store.state.pTypes[4]})}}  color={(store.state.showPtype == store.state.pTypes[4]) ? "secondary" : "primary"}>{store.state.pTypes[4]}</Button>
+        <Button onClick={() => { store.dispatch({type:'showPtype', message: store.state.pTypes[0]})}} color={(store.state.showPtype == store.state.pTypes[0]) ? "secondary" : "primary"} style={{textTransform: 'none'}}>{store.state.pTypes[0].toLowerCase()}</Button>
+        <Button onClick={() => { store.dispatch({type:'showPtype', message: store.state.pTypes[1]})}}  color={(store.state.showPtype == store.state.pTypes[1]) ? "secondary" : "primary"}  style={{textTransform: 'none'}}>{store.state.pTypes[1].toLowerCase()} </Button>
+        <Button onClick={() => { store.dispatch({type:'showPtype', message: store.state.pTypes[2]})}} color={(store.state.showPtype == store.state.pTypes[2]) ? "secondary" : "primary"}  style={{textTransform: 'none'}}>{store.state.pTypes[2].toLowerCase()}</Button>
+        <Button onClick={() => { store.dispatch({type:'showPtype', message: store.state.pTypes[3]})}} color={(store.state.showPtype == store.state.pTypes[3]) ? "secondary" : "primary"}  style={{textTransform: 'none'}}>{store.state.pTypes[3].toLowerCase()}</Button>
+        <Button onClick={() => { store.dispatch({type:'showPtype', message: store.state.pTypes[4]})}}  color={(store.state.showPtype == store.state.pTypes[4]) ? "secondary" : "primary"}  style={{textTransform: 'none'}}>{store.state.pTypes[4].toLowerCase()}</Button>
       </ButtonGroup>
       {store.state.showPtype == 'Condo/Townhome' ? (<p>select beds number</p>) : null}
       <DataGrid className={classes.root} rowBackground="white"  GridLinesVisibility="None" autoHeight={true} sortingOrder={['desc', 'asc', null]} rows={ 
         getData()} columns={columns()} />
     {/* // </div> */}
-    <p> line chart: </p>
     {/* <LineChart data={}/>
       <LineChart data={}></LineChart> */}
     {/* <Sparklines data={store.state.data.total2weeks[store.state.showMetro][store.state.showPtype].filter(el => el.city == 'San-Francisco_CA')[0].ppSqFtArr} style={{marginLeft: '-12px', minWidth: '18%'}}> className="responsiveChart"  */}
@@ -361,14 +385,16 @@ export const Chart = () => {
             <SparklinesSpots spotColors={{ "-1": "red", "0": "black", "1": "#3eab66"}} size={4.5}/>
          </Sparklines>  
          */} 
-         <Sparklines data={[5, 10, 5, 20]}>
+
+         {/* <Sparklines data={[5, 10, 5, 20]}>
           <SparklinesLine color="blue" />
-        </Sparklines>
+        </Sparklines> */}
+
         {/* <Sparklines data={store.state.data.total2weeks[store.state.showMetro][store.state.showPtype].filter(el => el.city == 'Palo-Alto_CA')[0].ppSqFtArr}>
         <SparklinesLine color="blue" />
         <SparklinesReferenceLine type="median" />
         </Sparklines> */}
-    <Trend
+    {/* <Trend
       smooth={true}
       autoDraw
       autoDrawDuration={2000}
@@ -378,16 +404,25 @@ export const Chart = () => {
       radius={50}
       strokeWidth={2.1}
       strokeLinecap={'butt'}
-    />
+    /> */}
 
-    <LineChart data={{"2017-05-13": 2, '': 5, "2017-05-14": 5}} setTitle='Test Title' xtitle="Time" ytitle="P/SqFt" />
-    <LineChart data={[["2020-10-13", 499.18736939865335], ["2020-10-14", 532], ["2020-10-15", 232], ["2", 828.3132530120482]]}/>
-    
+    {/* <LineChart data={{"2017-05-13": 2, '': 5, "2017-05-14": 5}} setTitle='Test Title' xtitle="Time" ytitle="P/SqFt" />
+    <LineChart data={[["2020-10-13", 499.18736939865335], ["2020-10-14", 532], ["2020-10-15", 232], ["2", 828.3132530120482]]}/> */}
+    {/* <div class='tableauPlaceholder' id='viz1603916549235' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;We&#47;WeeklyMarketReport&#47;weekly&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='WeeklyMarketReport&#47;weekly' /><param name='tabs' value='no' /><param name='toolbar' value='no' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;We&#47;WeeklyMarketReport&#47;weekly&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='filter' value=':revert=' /><param name='refresh' value='yes' /><param name='filter' value=':linktarget=' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1603916549235');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='800px';vizElement.style.height='600px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script> */}
+  
+     {/* {console.log(store.state.htmlStrings[store.state.showMetro].htmlString) }
+      <div dangerouslySetInnerHTML={{__html: store.state.htmlStrings[store.state.showMetro].htmlString }}/>
+    </div> */}
+    {/* <div dangerouslySetInnerHTML={{__html: `<p> yo </p>`}}></div> */}
+  
     </>
+      
    )
    :
    (<p> getting data </p>)
   );
+  
+
 
 
 }

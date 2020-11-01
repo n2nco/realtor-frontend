@@ -3,13 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-
+import TableauFrame from './TableauFrame'
 import StoreProvider from './StoreProvider'
 
 ReactDOM.render(
   <React.StrictMode>
       <StoreProvider>
        <App />
+       {/* <TableauFrame/> */}
+
     </StoreProvider>
   </React.StrictMode>,
   document.getElementById('root')

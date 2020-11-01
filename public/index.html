@@ -29,7 +29,45 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
+
+    
+
+   <!-- <div class='tableauPlaceholder' id='viz1603943518547' style='position: relative; display: none;'>	
+   <noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;KT&#47;KT9R37BD6&#47;1_rss.png' style='border: none' /></a></noscript>	
+   <object class='tableauViz'  style='display:none;'>	
+      <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />	
+      <param name='embed_code_version' value='3' />	
+      <param name='path' value='shared&#47;KT9R37BD6' />	
+      <param name='toolbar' value='no' />	
+      <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;KT&#47;KT9R37BD6&#47;1.png' />	
+      <param name='animate_transition' value='yes' />	
+      <param name='display_static_image' value='yes' />	a
+      <param name='display_spinner' value='yes' />	
+      <param name='display_overlay' value='yes' />	
+      <param name='display_count' value='yes' />	
+      <param name='tabs' value='no' />	
+      <param name='filter' value=':revert=' />	
+      <param name='refresh' value='yes' />	
+      <param name='filter' value=':linktarget=' />	
+   </object>	
+</div>	 -->
+
+
+
+
+<!-- <script type='text/javascript'>    
+window.showTableau = (id) => {               
+    var divElement = document.querySelector(id);      /*param: 'viz1603943518547'*/          
+    var vizElement = divElement.getElementsByTagName('object')[0];      
+    console.log('vizEl:')             
+    console.log(vizElement)             
+    vizElement.style.width='800px'; vizElement.style.height='600px';                  
+      var scriptElement = document.createElement('script');                   
+      scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';            
+              vizElement.parentNode.insertBefore(scriptElement, vizElement);            
+    }    </script>
+   -->
+<!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
 
@@ -39,5 +77,104 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+
+<!-- //     let cb = () => { var divElement = document.getElementByClassName('tableauPlaceholder');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='800px';vizElement.style.height='600px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);    alert('done'); console.log('yoo')}
+//     const targetNode = document.getElementByClassName('tableauPlaceholder')
+//     const config = { attributes: true, childList: true, subtree: true };
+//     const observer = new MutationObserver(cb);
+
+// observer.observe(targetNode, config);
+// observer.disconnect();
+// select the target node -->
+<script type='text/javascript'>
+
+
+  console.log('running settimeout')
+    var target = document.querySelector('.tableauPlaceholder')
+
+    // create an observer instance
+    var observer = new MutationObserver(function(mutations) {
+      alert('found') 
+        mutations.forEach(function(mutation) {
+          alert('found') 
+          console.log('found--')
+        });
+    });
+
+    let callback = () => { alert('found')  }
+
+    // configuration of the observer:
+    var config = { attributes: true, childList: true, characterData: true }
+
+    // pass in the target node, as well as the observer options
+    observer.observe(target, config);
+
+    // later, you can stop observing
+    observer.disconnect();
+
+
+
+
+    </script> 
+
   </body>
+<div style="justify-content: center; display: flex;">
+
+<div class='tableauPlaceholder' id='viz1604202500012' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;RR&#47;RRF8SNNW7&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='path' value='shared&#47;RRF8SNNW7' /> <param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;RR&#47;RRF8SNNW7&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='tabs' value='yes' /><param name='filter' value='%3Arevert=' /><param name='refresh' value='yes' /><param name='filter' value='%3Alinktarget=' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1604202500012');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='800px';vizElement.style.height='650px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+<div class='tableauPlaceholder' id='viz1604203237336' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;BZ&#47;BZKCSCJH5&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='path' value='shared&#47;BZKCSCJH5' /> <param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;BZ&#47;BZKCSCJH5&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='tabs' value='yes' /><param name='refresh' value='yes' /><param name='filter' value='%3Arevert=' /><param name='filter' value='%3Alinktarget=' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1604203237336');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='800px';vizElement.style.height='650px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+<div class='tableauPlaceholder' id='viz1604203308951' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;8D&#47;8D5SGXFTB&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='path' value='shared&#47;8D5SGXFTB' /> <param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;8D&#47;8D5SGXFTB&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='tabs' value='yes' /><param name='refresh' value='yes' /><param name='filter' value='%3Arevert=' /><param name='filter' value='%3Alinktarget=' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1604203308951');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='800px';vizElement.style.height='650px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+
+<div class='tableauPlaceholder' id='viz1604209913562' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;G9&#47;G99CMSJX9&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='path' value='shared&#47;G99CMSJX9' /> <param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;G9&#47;G99CMSJX9&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='tabs' value='yes' /><param name='filter' value='%3Arevert=' /><param name='refresh' value='yes' /><param name='filter' value='%3Alinktarget=' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1604209913562');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='800px';vizElement.style.height='650px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+<div class='tableauPlaceholder' id='viz1604209787385' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;TJ&#47;TJG55DBZM&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='path' value='shared&#47;TJG55DBZM' /> <param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;TJ&#47;TJG55DBZM&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='tabs' value='yes' /><param name='filter' value='%3Arevert=' /><param name='refresh' value='yes' /><param name='filter' value='%3Alinktarget=' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1604209787385');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='800px';vizElement.style.height='650px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+<div class='tableauPlaceholder' id='viz1604210081190' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;QF&#47;QFPSW3JYT&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='path' value='shared&#47;QFPSW3JYT' /> <param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;QF&#47;QFPSW3JYT&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='tabs' value='yes' /><param name='filter' value='%3Arevert=' /><param name='refresh' value='yes' /><param name='filter' value='%3Alinktarget=' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1604210081190');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='800px';vizElement.style.height='650px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+</div>
+<script type='text/javascript'>  
+window.ids = {} //
+window.ids['Bay_Area'] = 'viz1604202500012'
+window.ids['New_York'] = 'viz1604203237336'
+window.ids['Los_Angeles'] = 'viz1604203308951'
+
+window.ids['Seattle'] = 'viz1604209913562'
+window.ids['San_Diego'] = 'viz1604209787385'
+window.ids['Portland']  = 'viz1604210081190'
+
+setTimeout( () => {
+  console.log('running index.html settimeout - initial run')
+  // for (key in window.ids) {
+    let els = document.querySelectorAll('.tableauPlaceholder')  
+    els.forEach(el => el.style.display = 'none')
+
+    let defaultMetro = document.getElementById(window.ids.Bay_Area)
+    defaultMetro.style.display = "block"
+
+  // }
+console.log('done settimeout display none')
+}, 1000)
+
+window.changeTableau = (metro) => { 
+
+  console.log('running changeTableau')
+  let id = window.ids[metro]
+  //for all that don't contain id, set display to none.
+  try {
+    for (key in window.ids) {
+      if (key == metro) { 
+        let el = document.getElementById(window.ids[key])
+        el.style.display = "block"
+        el.style.minHeight = "1000px"
+        el.style.minWidth = "1000px"
+        // el.style.outer['min-height'] = '700px' 
+
+      } else {
+        let el = document.getElementById(window.ids[key])
+        el.style.display = "none"
+      }
+    }
+  } catch(e) {
+    console.log(e + 'metro/key:' + key)
+  }
+
+}
+
+</script>
 </html>
